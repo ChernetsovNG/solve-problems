@@ -20,23 +20,18 @@ public class Solution {
         for (Map.Entry<Integer, Integer> entry : elemIndex.entrySet()) {
             Integer elem = entry.getKey();
             Integer index = entry.getValue();
-            int needIndex = needIndex(elem);
-            if (checked[needIndex] || index == needIndex) {
+            if (checked[elem - 1] || index == elem - 1) {
                 continue;
             }
             int count = 0;
-            Integer nextElem = indexElem.get(needIndex);
-            while (!checked[needIndex(nextElem)]) {
-                checked[needIndex(nextElem)] = true;
-                nextElem = indexElem.get(needIndex(nextElem));
+            Integer nextElem = indexElem.get(elem - 1);
+            while (!checked[nextElem - 1]) {
+                checked[nextElem - 1] = true;
+                nextElem = indexElem.get(nextElem - 1);
                 count++;
             }
             result += (count - 1);
         }
         return result;
-    }
-
-    private static int needIndex(int elem) {
-        return elem - 1;
     }
 }
