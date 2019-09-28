@@ -1,3 +1,4 @@
 rootProject.name = 'solve-problems'
 include 'HackerRank'
+include 'AdaptiveJava'
 
