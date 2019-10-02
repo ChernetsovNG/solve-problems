@@ -1,9 +1,9 @@
-package ru.nchernetsov.interviewPreparationKit.MinimumSwaps2;
+package ru.nchernetsov.interviewPreparationKit;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Solution {
+public class MinimumSwaps2 {
 
     // Complete the minimumSwaps function below.
     static int minimumSwaps(int[] arr) {

@@ -1,10 +1,10 @@
-package ru.nchernetsov.interviewPreparationKit.SherlockAndAnagrams;
+package ru.nchernetsov.interviewPreparationKit;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class SherlockAndAnagrams {
 
     private static final int A_CHAR_CODE = 'a';
     private static final int ALPHABET_LEN = 26;
