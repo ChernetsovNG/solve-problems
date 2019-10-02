@@ -34,14 +34,14 @@ public class CountTripletsTest {
     @Test
     public void test5() {
         List<Long> list = Arrays.asList(1L, 1L, 1L);
-        assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(1);
+        // assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(1);
         assertThat(CountTriplets.countTriplets(list, 1)).isEqualTo(1);
     }
 
     @Test
     public void test6() {
         List<Long> list = Arrays.asList(1L, 1L, 1L, 1L, 1L);
-        assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(10);
+        // assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(10);
         assertThat(CountTriplets.countTriplets(list, 1)).isEqualTo(10);
     }
 
@@ -51,7 +51,7 @@ public class CountTripletsTest {
                 .limit(100)
                 .boxed()
                 .collect(Collectors.toList());
-        assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(161700);
+        // assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(161700);
         assertThat(CountTriplets.countTriplets(list, 1)).isEqualTo(161700);
     }
 
@@ -61,7 +61,20 @@ public class CountTripletsTest {
                 .limit(100000)
                 .boxed()
                 .collect(Collectors.toList());
-        // assertThat(CountTriplets.naiveRealization(list, 1)).isEqualTo(166661666700000L);
-        assertThat(CountTriplets.countTriplets(list, 1)).isEqualTo(166661666700000L);
+        long count = CountTriplets.countTriplets(list, 1);
+        System.out.println(166661666700000L / count);
+        assertThat(count).isEqualTo(166661666700000L);
+    }
+
+    @Test
+    public void test9() {
+        List<Long> list = LongStream.generate(() -> 1237L)
+                .limit(500)
+                .boxed()
+                .collect(Collectors.toList());
+        long naiveCount = CountTriplets.naiveRealization(list, 1);
+        long count = CountTriplets.countTriplets(list, 1);
+        assertThat(naiveCount).isEqualTo(20708500L);
+        assertThat(count).isEqualTo(20708500L);
     }
 }
