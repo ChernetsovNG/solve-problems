@@ -7,19 +7,24 @@ import java.util.Map;
 
 public class FrequencyQueries {
 
-    static List<Integer> freqQuery(List<List<Integer>> queries) {
+    static List<Integer> freqQuery(List<int[]> queries) {
         List<Integer> result = new ArrayList<>();
-        Map<Integer, Integer> numberCountMap = new HashMap<>();
-        Map<Integer, Integer> countsCountMap = new HashMap<>();
-        for (List<Integer> query : queries) {
-            Integer operation = query.get(0);
-            Integer number = query.get(1);
+        Map<Integer, Integer> numberCountMap = new HashMap<>(queries.size());
+        Map<Integer, Integer> countsCountMap = new HashMap<>(queries.size());
+        for (int[] query : queries) {
+            Integer operation = query[0];
+            Integer number = query[1];
             if (operation.equals(1)) {
                 insert(number, numberCountMap, countsCountMap);
             } else if (operation.equals(2)) {
                 delete(number, numberCountMap, countsCountMap);
             } else if (operation.equals(3)) {
-                check(number, countsCountMap, result);
+                Integer countsCount = countsCountMap.get(number);
+                if (countsCount != null && countsCount > 0) {
+                    result.add(1);
+                } else {
+                    result.add(0);
+                }
             }
         }
         return result;
@@ -56,15 +61,6 @@ public class FrequencyQueries {
             if (newCount > 0) {
                 countsCountMap.put(newCount, countsCountMap.getOrDefault(newCount, 0) + 1);
             }
-        }
-    }
-
-    private static void check(Integer number, Map<Integer, Integer> countsCountMap, List<Integer> result) {
-        Integer countCount = countsCountMap.get(number);
-        if (countCount != null && countCount > 0) {
-            result.add(1);
-        } else {
-            result.add(0);
         }
     }
 }
