@@ -14,9 +14,7 @@ public class FraudulentActivityNotifications {
         int[] c = new int[K];
         int[] medianArr = new int[d];
 
-        for (int i = 0; i < d; i++) {
-            trailing[i] = expenditure[i];
-        }
+        System.arraycopy(expenditure, 0, trailing, 0, d);
 
         double m;
         for (int i = d; i < n; i++) {
