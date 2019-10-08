@@ -3,13 +3,16 @@ package ru.nchernetsov.interviewPreparationKit;
 public class MergeSortCountingInversions {
 
     static long countInversions(int[] arr) {
-        return naiveRealization(arr);
+        return mergeInversions(arr);
     }
 
-    // реализация за O(n x log(n))
+    // Сортировка слиянием с подсчётом количества инверсий за O(n x log(n))
+
     private static long mergeInversions(int[] arr) {
         return 0L;
     }
+
+    // Сортировка слиянием
 
     static void mergeSort(int[] arr) {
         int[] temp = new int[arr.length];
