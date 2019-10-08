@@ -47,4 +47,18 @@ public class MergeSortCountingInversionsTest {
         long countInversions = MergeSortCountingInversions.countInversions(arr);
         assertThat(countInversions).isEqualTo(3);
     }
+
+    @Test
+    public void mergeSortTest1() {
+        int[] arr = {7, 5, 3, 1};
+        MergeSortCountingInversions.mergeSort(arr);
+        assertThat(arr).isSorted();
+    }
+
+    @Test
+    public void mergeSortTest2() {
+        int[] arr = {45, 44, 22, 19, 6, 4, 3, 2, 1, 0};
+        MergeSortCountingInversions.mergeSort(arr);
+        assertThat(arr).isSorted();
+    }
 }
