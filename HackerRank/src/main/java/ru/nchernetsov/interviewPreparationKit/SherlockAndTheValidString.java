@@ -1,42 +1,35 @@
 package ru.nchernetsov.interviewPreparationKit;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class SherlockAndTheValidString {
 
-    private static final String YES = "YES";
-    private static final String NO = "NO";
-
     static String isValid(String s) {
-        if (s.isEmpty()) {
-            return NO;
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> countMap = new HashMap<>();
+        for (char ch : chars) {
+            countMap.merge(ch, 1, Integer::sum);
         }
-        if (s.length() <= 3) {
-            return YES;
+        // 1. Все элементы имеют одну частоту
+        Set<Integer> differentCounts = new HashSet<>(countMap.values());
+        if (differentCounts.size() == 1) {
+            return "YES";
         }
-
-        int[] letters = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            letters[s.charAt(i) - 'a']++;
-        }
-
-        Arrays.sort(letters);
-        int i = 0;
-        while (letters[i] == 0) {
-            i++;
-        }
-
-        //System.out.println(Arrays.toString(letters));
-        int min = letters[i];   //the smallest frequency of some letter
-        int max = letters[25]; // the largest frequency of some letter
-        if (min == max) {
-            return YES;
-        } else {
-            // remove one letter at higher frequency or the lower frequency
-            if ((max - min == 1 && max > letters[24]) || (min == 1 && letters[i + 1] == max)) {
-                return YES;
+        List<Integer> counts = new ArrayList<>(countMap.values());
+        Collections.sort(counts);
+        // 2. Все имеют одну частоту, а один элемент имеет частоту 1
+        if (counts.get(0) == 1) {
+            Set<Integer> nextElements = new HashSet<>(counts.subList(1, counts.size()));
+            if (nextElements.size() == 1 && nextElements.iterator().next() > 1) {
+                return "YES";
             }
         }
-        return NO;
+        // 3. Только один символ имеет частоту, на 1 больше, чем остальные
+        Integer maxCount = counts.get(counts.size() - 1);
+        Set<Integer> prevElements = new HashSet<>(counts.subList(0, counts.size() - 1));
+        if (prevElements.size() == 1 && maxCount - prevElements.iterator().next() == 1) {
+            return "YES";
+        }
+        return "NO";
     }
 }
